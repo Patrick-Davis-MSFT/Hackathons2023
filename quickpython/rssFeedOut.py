@@ -5,6 +5,17 @@
 
 import feedparser
 import argparse
+from lxml import html
+import requests
+
+def strip_html(s):
+  return str(html.fromstring(s).text_content().replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace('    ', ' ').replace('    ', ' ').replace('    ', ' '))
+
+def getFeedArticle(url):
+    response = requests.get(url)
+    content = response.text
+    return content
+
 
 def readRSS( url ):
     
@@ -19,16 +30,14 @@ def readRSS( url ):
         article_link = entry.link
         article_published_at = entry.published # Unicode string
         article_published_at_parsed = entry.published_parsed # Time object
-        # article_author = entry.author  DOES NOT EXIST
         content = entry.summary
-        # article_tags = entry.tags  DOES NOT EXIST
 
 
         print ("{}[{}]".format(article_title, article_link))
         print ("Published at {}".format(article_published_at))
-        # print ("Published by {}".format(article_author)) 
-        print("Content {}".format(content))
-        # print("catagory{}".format(article_tags))
+
+        print(" \n ---------------------------------------------------- \n")
+        return entry.link
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser(description='Convert PDF to text. Output appends to existing file, so if you want to start fresh, delete the output file')
@@ -37,4 +46,12 @@ if __name__ == "__main__":
     
     feedURI = args.rssfeed or "https://www.cisa.gov/cybersecurity-advisories/ics-advisories.xml"
 
-    readRSS(feedURI)
+    contentURI = readRSS(feedURI)
+    print(" \n ---------------------------------------------------- \n")
+    print(str(contentURI))
+
+    content = getFeedArticle(contentURI)
+
+    print(" \n ---------------------------------------------------- \n")
+    print(strip_html(content))
+        
