@@ -36,7 +36,6 @@ def readRSS( url ):
         print ("{}[{}]".format(article_title, article_link))
         print ("Published at {}".format(article_published_at))
 
-        print(" \n ---------------------------------------------------- \n")
         return entry.link
 
 if __name__ == "__main__": 
