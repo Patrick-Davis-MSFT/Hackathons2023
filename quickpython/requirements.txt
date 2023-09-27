@@ -1,3 +1,4 @@
 pypdf==3.9.0
 azure-ai-formrecognizer==3.2.1
 azure-identity==1.13.0
+feedparser==6.0.10
