@@ -4,7 +4,7 @@
 # python .\sumarizetxt.py -e <endpoint> -k <key> 
 
 
-# This library is required (it has been added to the requirements.txt file)
+# The required libraries have been added to the requirements.txt file
 # pip install -r ./requirements.txt
 
 # using the set command it will only set the variables during the current console session and will not persist.
