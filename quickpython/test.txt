@@ -1,0 +1,302 @@
+Underlying Medical Conditions and Severe
+Illness Among 540,667 Adults Hospitalized
+With COVID-19, March 2020–March 2021
+
+Abstract
+Introduction
+Severe COVID-19 illness in adults has been linked to underlying
+medical conditions. This study identified frequent underlying conditions and their attributable risk of severe COVID-19 illness.
+Methods
+We used data from more than 800 US hospitals in the Premier
+Healthcare Database Special COVID-19 Release (PHD-SR) to describe hospitalized patients aged 18 years or older with COVID-19
+from March 2020 through March 2021. We used multivariable
+generalized linear models to estimate adjusted risk of intensive
+care unit admission, invasive mechanical ventilation, and death associated with frequent conditions and total number of conditions.
+Results
+Among 4,899,447 hospitalized adults in PHD-SR, 540,667
+(11.0%) were patients with COVID-19, of whom 94.9% had at
+least 1 underlying medical condition. Essential hypertension
+(50.4%), disorders of lipid metabolism (49.4%), and obesity
+(33.0%) were the most common. The strongest risk factors for
+death were obesity (adjusted risk ratio [aRR] = 1.30; 95% CI,
+1.27–1.33), anxiety and fear-related disorders (aRR = 1.28; 95%
+CI, 1.25–1.31), and diabetes with complication (aRR = 1.26; 95%
+CI, 1.24–1.28), as well as the total number of conditions, with
+aRRs of death ranging from 1.53 (95% CI, 1.41–1.67) for patients
+with 1 condition to 3.82 (95% CI, 3.45–4.23) for patients with
+more than 10 conditions (compared with patients with no conditions).
+
+Conclusion
+Certain underlying conditions and the number of conditions were
+associated with severe COVID-19 illness. Hypertension and disorders of lipid metabolism were the most frequent, whereas
+obesity, diabetes with complication, and anxiety disorders were
+the strongest risk factors for severe COVID-19 illness. Careful
+evaluation and management of underlying conditions among patients with COVID-19 can help stratify risk for severe illness.
+Introduction
+As the COVID-19 pandemic continues, a need remains to understand indicators for severe illness, defined as admission to an intensive care unit (ICU) or stepdown unit, invasive mechanical
+ventilation (IMV), or death (1). Several underlying medical conditions among adults, including diabetes, obesity, chronic kidney
+disease (CKD), hypertension, and immunosuppression, have been
+reported to be associated with increased risk for severe illness
+from COVID-19 (2-4). However, many existing studies are limited in geographic representation, restricted to cases early in the
+outbreak, or focused on a limited number of preselected conditions and/or severe outcomes (3–5). Finally, few studies have
+shown the effect of the number of underlying medical conditions
+on the risk for severe COVID-19 illness (6).
+Both the baseline prevalence of a condition and the magnitude of
+its association with COVID-19 illness help determine the impact
+of a condition at a population level. This study, based on a large
+electronic administrative discharge data set, sought to describe the
+most frequent underlying medical conditions among hospitalized
+patients with COVID-19 and their associations with severe illness.
+This information can better inform clinical practice and public
+health priorities, such as identifying populations for focused prevention efforts and potential vaccine prioritization.
+Methods
+We used the Premier Healthcare Database Special COVID-19 Release (PHD-SR, release date May 11, 2021), a large, US hospitalbased, all-payer database (7). The sample included patients aged
+18 years or older who had an inpatient encounter with an
+International Classification of Diseases, Tenth Revision, Clinical
+Modification (ICD-10-CM) diagnosis of U07.1 (“COVID-19, virus identified”) from April 1, 2020, through March 31, 2021, or
+B97.29 (“other coronavirus as the cause of diseases classified elsewhere,” recommended before the April 2020 release of U07.1)
+from March 1, 2020, through April 30, 2020 (8,9).
+We examined 3 indicators of severe COVID-19 illness: admission
+to an ICU or stepdown unit, IMV, and death. These indicators
+were not mutually exclusive.
+We considered 2 exposures of interest: 1) specific underlying
+medical conditions and 2) the number of conditions. We captured
+data on both exposures by using ICD-10-CM diagnosis codes from
+inpatient or outpatient hospital records in PHD-SR from January
+2019 up to and including a patient’s first inpatient encounter for
+COVID-19. We used 1 encounter with an ICD-10-CM code to establish the presence of an underlying condition because few patients had multiple encounters in this hospital database. We excluded 3 ICD-10-CM codes (ie, oxygen support, dependence on a
+ventilator, and tracheostomy) listed during the patient’s COVID19 encounter because they could be part of COVID-19 treatment.
+We used a multistep approach to identify underlying medical conditions. First, we used the Chronic Condition Indicator (CCI) to
+identify chronic ICD-10-CM codes (11,803 of 73,205 total ICD10-CM codes), which were then aggregated into 314 categories
+using the Clinical Classifications Software Refined (CCSR)
+(10,11). To further differentiate underlying conditions from acute
+complications of COVID-19, a panel of physicians (K.K.W.,
+W.M.K., H.G.R., B.B., N.T.A., J.M.N.) classified the 314 CCSR
+categories into “likely underlying” (274 categories; eg, asthma);
+“indeterminate,” which could include underlying or acute complications or both (29 categories; eg, cardiac dysrhythmias); or “likely
+acute” (11 categories; eg, acute pulmonary embolism). We used
+the “likely underlying” CCSR categories for our analysis of underlying medical conditions and excluded the “indeterminate” or
+“likely acute” CCSR categories. People diagnosed with both CCSR categories of “diabetes with complication” and “diabetes
+without complication” (n = 55,141) were classified as having diabetes with complication. The number of underlying medical conditions was defined as the number of unique CCSR categories associated with each patient (0, 1, 2–5, 6–10, >10).
+Statistical analyses
+We described the sample by patient and hospital characteristics.
+Then we selected the most frequent underlying CCSR categories
+with a prevalence of 10% or more in the sample. We used multivariable generalized linear models with Poisson distribution and
+log link function to estimate adjusted risk ratios (aRRs) for 3 outcomes of interest among hospitalized patients: ICU admission,
+IMV, and death (reference was surviving hospitalized patients
+without that outcome). We performed these estimations by 1) including all frequent CCSR categories in the same model (“full
+model”) and 2) including 1 CCSR category per statistical model
+(“restricted model”). We focused our interpretations on the CCSR
+categories whose direction of association (positive or negative)
+
+was consistent between the restricted and the full model. We also
+conducted a stratified analysis of frequent conditions by age group
+(frequency ≥10.0% in each age group). Finally, we estimated the
+association between the number of CCSR categories and the 3
+severity outcomes.
+All models used robust SEs clustered on hospital identification,
+and controlled for patient age, sex, race/ethnicity, payer type, hospital urbanicity, US Census region of hospital, admission month,
+and admission month squared (to account for potential nonlinear
+unobservable changes in treatment, patient profile, or severity of
+illness during the pandemic). All analyses were conducted using R
+version 4.0.2 (The R Foundation) and Stata version 15.1 (StataCorp LLC).
+We performed 2 sensitivity analyses using all chronic CCSR categories, including those determined by the clinician panel to be
+“likely underlying,” “indeterminate,” and “likely acute.” We performed 1 sensitivity analysis in the main sample and another that
+was limited to encounters that preceded the first COVID-19 inpatient encounter. These analyses were used to validate the associations found in the main analysis, as well as to examine the conditions excluded from the main analysis after clinical review.
+This activity was reviewed by the Centers for Disease Control and
+Prevention (CDC) and was conducted according to applicable federal law and CDC policy.
+Results
+Among 4,899,447 hospitalized patients in PHD-SR, 540,667
+(11.0%) patients met the study inclusion criteria for COVID-19
+(Table 1). Of patients hospitalized with COVID-19, 94.9% had at
+least 1 documented underlying CCSR condition, 249,522 (46.2%)
+had an ICU admission, 76,680 (14.2%) received IMV, and 80,174
+(14.8%) died. The study sample included 261,078 (48.3%) female
+patients, 94,670 (17.5%) non-Hispanic Black patients, and 93,171
+(17.2%) Hispanic or Latino patients. The median age was 66
+years, and the most common insurance types were Medicare
+(292,978 [54.2%]) and commercial (130,995 [24.2%]). The 863
+hospitals visited by patients included in the study were distributed
+across all US Census regions.
+We found 18 underlying CCSR categories with a frequency of
+10.0% or more in the sample; the most common were essential hypertension (272,591 [50.4%]), disorders of lipid metabolism
+(267,057 [49.4%]; top ICD-10-CM code was hyperlipidemia),
+obesity (178,153 [33.0%]), diabetes with complication (171,727
+[31.8%]), and coronary atherosclerosis and other heart disease
+(134,839 [24.9%]) (Figure 1).
+
+Relative risk of death in the full model was 30% higher with
+obesity (95% CI, 27%–33%), 28% higher with anxiety and fearrelated disorders (95% CI, 25%–31%), 26% higher with diabetes
+with complication (95% CI, 24%–28%), 21% higher with CKD
+(95% CI, 19%–24%), 18% higher with neurocognitive disorders
+including dementia and Alzheimer’s disease (95% CI, 15%–21%),
+18% higher with chronic obstructive pulmonary disease and bronchiectasis (95% CI, 16%–20%), 17% higher with aplastic anemia
+including anemia in CKD (95% CI, 14%–19%), 14% higher with
+coronary atherosclerosis and other heart disease (95% CI,
+12%–16%), and 4% higher with thyroid disorders including hypothyroidism (95% CI, 2%–6%) (Table 2). These conditions were
+also associated with a higher risk of IMV and ICU admission.
+Diabetes without complication was associated with a 6% lower
+risk of death (aRR = 0.94; 95% CI, 0.91–0.97), 9% lower risk of
+IMV (aRR = 0.91; 95% CI, 0.88–0.94), and 2% lower risk of ICU
+admission (aRR = 0.98; 95% CI, 0.97–0.998). Essential hypertension was associated with an 8% lower risk of death (aRR = 0.92;
+95% CI, 0.90–0.93), 6% lower risk of IMV (aRR = 0.94; 95% CI,
+0.92–0.95), and a 1% lower risk of ICU admission (aRR = 0.99;
+95% CI, 0.97–0.999). Asthma was associated with a 9% lower risk
+of death (aRR = 0.91; 95% CI, 0.89–0.94) and a 4% lower risk of
+IMV (aRR = 0.96; 95% CI, 0.94–0.99).
+Age-stratified analysis showed that the number of frequent underlying medical conditions (present in ≥10.0% of patients) was higher with older age (Table 3). The most frequent conditions were
+obesity, diabetes, and essential hypertension among patients
+younger than 65, and disorders of lipid metabolism, essential hypertension, diabetes, and coronary atherosclerosis among patients
+aged 65 or older. Among patients aged 18 to 39, essential hypertension was associated with a 26% higher risk of death (95% CI,
+10%–44%), 25% higher risk of IMV (95% CI, 17%–35%), and an
+11% higher risk of ICU admission (95% CI, 7%–15%). In the
+same age group, asthma was frequent and was associated with a
+9% (95% CI, 5%–13%) higher risk of ICU admission but was not
+significantly associated with higher risk of IMV or death. Other
+specified status (CCSR category indicating a need for specific
+medical support, such as a wheelchair or renal dialysis) was a frequent category among patients aged 40 to 64 and 65 or older and
+was associated with a 7% (1%–13%) and 4% (1%–6%) higher risk
+of death, respectively.
+We found a dose–response association between the total number
+of underlying medical conditions and risk of severe COVID-19 illness (Figure 2). Compared with patients with no documented underlying medical conditions, patients’ risk of death was 1.53 times
+(95% CI, 1.41–1.67) as high if they had 1 condition, 2.55 times
+(95% CI, 2.32–2.80) as high if they had 2 to 5 conditions, 3.29
+times (95% CI, 2.98–3.63) as high if they had 6 to 10 conditions,
+and 3.82 times (95% CI, 3.45–4.23) as high if they had more than
+10 conditions. Adjusted RRs for IMV ranged from 1.57 (95% CI,
+1.45–1.70) with 1 condition to 4.47 (95% CI, 4.07–4.90) with
+more than 10 conditions. Adjusted risk ratios for ICU admission
+ranged from 1.32 (95% CI =1.27–1.36) for patients with 1 condition to 1.96 (95% CI, 1.82–2.11) for patients with more than 10
+conditions.
+
+In the first sensitivity analysis, performed by using all CCSR categories, we identified 6 additional frequent “indeterminate” CCSR categories: cardiac dysrhythmias (n = 124,367 [23.0%]), heart
+failure (n = 104,858 [19.4%]), other specified nervous system disorders (n = 89,929 [16.6%]; top ICD-10-CM code, metabolic encephalopathy), other specified and unspecified nutritional and
+metabolic disorders (n = 89,337 [16.5%]; top code, hypomagnesemia), coagulation and hemorrhagic disorders (n = 75,766
+[14.0%]), and diseases of white blood cells (n = 57,765 [10.7%]).
+The risk ratio estimates of most previously found underlying conditions were lower with the inclusion of these 6 conditions in the
+full models.
+In the second sensitivity analysis, which used a subset of 278,215
+patients with at least 1 encounter in the PHD-SR before their first
+COVID-19 hospitalization, diabetes without complication was associated with an 8% (95% CI, 5%–12%) higher risk of death, a
+13% (95% CI, 10%–17%) higher risk of IMV, and a 5% (95% CI,
+4%–7%) higher risk of ICU admission; sleep–wake disorders were
+associated with an 8% (95% CI, 5%–11%) higher risk of IMV.
+Anxiety and fear-related disorders were associated with a 2%
+(95% CI, 0.4%–4%) higher risk of ICU admission but not with a
+higher risk of death or IMV, on the basis of the full model.
+
+Discussion
+Among 4,899,447 hospitalized US adults in the PHD-SR, 540,667
+(11.0%) were hospitalized with COVID-19. Among patients hospitalized with COVID-19, we found 18 most frequent underlying
+conditions, of which 9 were associated with severe COVID-19 illness. These 9 conditions were both prevalent in the sample (affecting 81.9% of inpatients with COVID-19) and associated with
+severe COVID-19 illness, suggesting a high impact at the population level. Essential hypertension and disorders of lipid metabolism were the most frequent conditions, whereas obesity, anxiety
+and fear-related disorders, diabetes with complication, and CKD
+were the strongest risk factors for death among hospitalized patients with COVID-19. This analysis builds on 2 previous analyses using data from the PHD-SR (3,5), by including more underlying medical conditions in the frequency analysis (274 CCSR categories), including 9 additional months of data, and examining
+outcomes other than mortality. The analysis also shows that the
+total number of underlying conditions is strongly associated with
+severe COVID-19 illness.
+The percentage of the US adult population known to have 2 or
+more underlying medical conditions ranges from approximately
+38% to 64% by state (12). Previous studies demonstrated that patients with medically attended COVID-19 often had multiple underlying medical conditions (6). However, studies have rarely focused on the effect of the number of conditions on severe COVID19 illness. We found that the risk of death, IMV, and ICU admission was often incrementally higher with a higher number of underlying medical conditions. Our finding that the number of underlying medical conditions is itself a risk factor for severe disease from COVID-19 identifies a population that has not been
+clearly described in previous literature.
+Our results reinforce previous findings of higher risk of severe illness associated with diabetes with complication (13), obesity
+(4,14), coronary atherosclerosis and other heart disease (4), chronic obstructive pulmonary disease (15), and neurocognitive disorders (3,4). Additionally, we identified several conditions for
+which little data exist regarding risk for severe COVID-19 illness,
+such as thyroid disorders (including hypothyroidism) and anxiety
+and fear-related disorders.
+Hypertension and disorders of lipid metabolism (the most prevalent conditions), and obesity and diabetes with complication
+(strong risk factors for death, IMV, and ICU admission) are associated with well-described hormonal and inflammatory pathways,
+also previously shown to be risk factors for severe COVID-19 illness (16). High baseline prevalence of obesity and diabetes, combined with their association with severe COVID-19 illness, suggest that these 2 conditions could have an outsized impact on the
+population with COVID-19. Prevention and treatment of these
+conditions may be an important strategy that could improve national resilience against chronic threats and acute crises. Essential
+hypertension, for which evidence is mixed on its association with
+severe COVID-19 illness (1), was shown in our analysis to be the
+most prevalent condition. It was found to be associated with a
+higher risk of severe COVID-19 illness only among patients aged
+18 to 39 but with a lower risk of severe COVID-19 illness among
+older patients and in the full sample. This finding supports a possible link with severe COVID-19 illness and identifies essential
+hypertension as a risk factor, especially among younger patients.
+Uncomplicated diabetes was found to be negatively associated
+with the risk of death and IMV. A positive association with risk of
+ICU admission was found only among patients aged 18 to 39. A
+previous study showed that although type 2 diabetes was a risk
+factor for mortality from severe COVID-19 illness, patients with
+diabetes and well-controlled blood glucose had lower mortality
+than those with diabetes and poorly controlled blood glucose (13).
+Our sensitivity analysis of a subset of patients with pre-COVID
+encounters identified a higher relative risk of death associated with
+uncomplicated diabetes present before the first COVID hospitalization. Coding bias (uncomplicated diabetes may be less frequently coded in hospitalizations with severe outcomes) (17) or reverse causality (diabetes complications arising from COVID-19
+illness or treatment) (18) could explain this finding.
+Anxiety and fear-related disorders were a prevalent condition in
+our sample; they were also the second highest risk factor for death
+among the underlying conditions considered in our study. The
+reasons for this finding are likely multifactorial and may include a
+reduced ability to prevent infection among patients with anxiety
+disorders, the immunomodulatory and/or cardiovascular effects of
+medications used to treat these disorders, or severe COVID-19 illness exacerbating anxiety disorders (19,20). In a subset of patients with pre-COVID encounters in our study, anxiety diagnosed before COVID-19 was not independently associated with
+death or IMV during COVID-19 hospitalization and, therefore, it
+is also plausible that anxiety was diagnosed during COVID-19 illness and may be a resulting sequela of COVID-19 (21). Future
+studies could explore the temporal and causal associations
+between anxiety disorders and severe COVID-19 illness.
+Our finding of a positive association of CKD and coronary atherosclerosis and other heart disease with severe COVID-19 illness has
+been well described at the epidemiologic level (22). We also found
+that people with neurocognitive disorders (including dementia and
+Alzheimer’s disease) were at a higher risk of severe COVID-19
+illness, which could be associated with difficulties in access to
+care and difficulties in following safeguarding procedures (23).
+
+Our finding of an association of anemia (specifically, anemia in
+CKD) with severe COVID-19 illness may be driven by a reduced
+capacity to respond to acute infections in people with this condition (24).
+Asthma diagnosis was present among 10.5% of hospitalized patients with COVID-19 in PHD-SR, which is higher than the 8.0%
+national prevalence of asthma in 2019 (25). At the same time, we
+found asthma to be associated with a lower risk of death in the full
+sample; a positive association with ICU admission was found only
+among patients younger than 40. This finding supports the mixed
+evidence on asthma as a risk factor for severe COVID-19 illness
+(1), although the association between asthma and severe COVID19 illness could differ by the degree of asthma severity (26).
+A sensitivity analysis revealed 6 “indeterminate” conditions (such
+as coagulation and hemorrhagic disorders, cardiac dysrhythmias,
+and heart failure) that were both frequent and associated with at
+least 1 severe COVID-19 illness outcome. Without better information on the temporality of these 6 conditions relative to the
+COVID-19 illness, we were unable to determine whether these
+were truly underlying conditions (27,28). Our second sensitivity
+analysis, restricted to 278,215 patients with encounters that preceded the first COVID-19 encounter, found a positive association
+of sleep–wake disorders and uncomplicated diabetes with severe
+COVID-19 illness. Weaker associations of other frequent conditions with COVID-19 illness in this analysis (compared with the
+main results) could be due to under-ascertainment of certain conditions that resulted from using data only for pre-COVID encounters.
+Our study has limitations. First, using ICD-10-CM diagnostic
+codes to identify COVID-19 cases might result in misclassification, although COVID-19 codes in PHD-SR showed high sensitivity and specificity with SARS-CoV-2 test results (29). Second,
+ICU risk estimates could be biased if ICU admission reflected
+factors other than severity of COVID-19, such as anticipation of
+future severity among health care professionals. Third, because
+our data were observational, we could not establish causal associations between the underlying conditions and severe COVID-19
+illness. Fourth, relying on ICD-10-CM codes to identify underlying medical conditions may have underestimated their prevalence.
+For example, obesity was diagnosed in 33.0% of the patients,
+which is possibly an underestimate of this condition, given the national prevalence of 42.4% in 2017–2018 (30) and the prevalence
+of 50.8% among patients with available height and weight data in
+PHD-SR (14). Fifth, prior literature shows evidence of both increased documentation (31) and underdiagnosis of certain chronic
+conditions among patients with more severe illness (17). Sixth, the
+interrelation of the conditions made it difficult to obtain independent associations, which could explain why certain conditions (disorders of lipid metabolism, sleep–wake disorders, esophageal disorders, and depressive disorders) had a positive association with
+COVID-19 illness when not adjusted for other conditions and a
+negative association when adjusted for other conditions. These differences could be explained by 1) confounding in the restricted
+model, 2) lack of independent effects in the full model, or 3) potential overadjustment in the full model by including variables that
+were on the causal pathway between the condition of interest and
+the outcome. Seventh, we were unable to assess the associations of
+current treatment modalities or medications for underlying medical conditions and severe COVID-19 illness because that information was not available in detail. Finally, including only the most
+frequent underlying medical conditions in the estimations of risk
+could have caused us to miss less prevalent risk factors of severity;
+however, conditions of any frequency were accounted for in the
+“number of conditions” predictor.
+Our study found that 9 of 18 frequent underlying medical conditions among adults hospitalized with COVID-19 were associated
+with severe illness. Combined with the high prevalence of these
+conditions (affecting 81.9% of hospitalized patients with COVID19 in PHD-SR), this finding suggests a potentially high impact at
+the population level. The highest risk of severe COVID-19 illness
+was associated with obesity, anxiety and fear-related disorders,
+diabetes with complication, CKD, and neurocognitive disorders.
+Among patients younger than 40, essential hypertension was also
+a risk factor for death. The total number of underlying medical
+conditions was a strong risk factor of severe COVID-19 illness.
+Preventing COVID-19 in populations with these conditions and
+multiple conditions should remain a public health priority, along
+with targeted mitigation efforts and ensuring high uptake of vaccine, when available, in these people and their close contacts
