@@ -6,4 +6,7 @@ lxml==4.9.3
 azure-ai-textanalytics==5.3.0
 chardet==5.2.0
 pathlib
-argparse
+argparse==1.4.0
+uuid==1.30
+azure.core
+azure.cosmos
