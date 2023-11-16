@@ -18,7 +18,7 @@ from azure.cosmos import CosmosClient, PartitionKey
 
 
 if __name__ == "__main__": 
-    parser = argparse.ArgumentParser(description='Convert PDF to text. Output appends to existing file, so if you want to start fresh, delete the output file')
+    parser = argparse.ArgumentParser(description='Upload the value specified to the Cosmos DB container specified')
     parser.add_argument('-d', '--dbname', help='cosmos db name', required=True)
     parser.add_argument('-c', '--containername', help='cosmos container name', required=True)
     parser.add_argument('-e', '--endpoint', help='cosmos endpoint', required=True)

@@ -10,3 +10,4 @@ argparse==1.4.0
 uuid==1.30
 azure.core
 azure.cosmos
+azure.keyvault
