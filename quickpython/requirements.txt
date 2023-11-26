@@ -11,3 +11,4 @@ uuid==1.30
 azure.core
 azure.cosmos
 azure.keyvault
+pandas

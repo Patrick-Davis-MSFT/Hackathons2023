@@ -2,3 +2,5 @@ output.txt
 *.pdf
 *.zip
 *.msg
+*.html
+*.csv
