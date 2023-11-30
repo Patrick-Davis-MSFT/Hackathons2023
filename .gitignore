@@ -4,3 +4,5 @@ output.txt
 *.msg
 *.html
 *.csv
+output/**
+output
