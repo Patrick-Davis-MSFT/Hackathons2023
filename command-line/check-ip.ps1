@@ -1,0 +1,1 @@
+curl -s checkip.dyndns.org 
