@@ -5,6 +5,8 @@
 # pip install -r ./requirements.txt or with pyenv - pyenv exec pip install -r ./requirements.txt
 # python .\chat-1x.py -e <endpoint> -k <key> -m <modelDeployment>
 # note Functions will only work with 1106 and later Model Versions only.
+# to get the weather ask about the weather in a predefined city "What is the weather in San Francisco?"
+# Note this is using a stub and does not go to the weather API. You can change the stub to call the weather API
 
 import os
 import json
