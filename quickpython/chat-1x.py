@@ -66,7 +66,7 @@ if __name__ == "__main__":
     ]
     
 
-    messages = [{"role": "system", "content": "Your name is Azure Andy and you ar an assistant that is a large language model trained by OpenAI to run on Azure."}]
+    messages = [{"role": "system", "content": "Your name is Azure Andy and you are an assistant that is a large language model trained by OpenAI to run on Azure."}]
     print("Welcome to Azure Andy, the Azure OpenAI Chatbot")
     print("You can ask me questions about the weather, or ask me to do things for you.")
     print("Type 'quit' to exit the chat.")
