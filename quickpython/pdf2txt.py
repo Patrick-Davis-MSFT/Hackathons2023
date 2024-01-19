@@ -1,5 +1,5 @@
 # this file will translate a text PDF file into a text file
-# install requirements first pip install -r ./requirements.txt
+# install requirements first pip install -r ./requirements.txt or with pyenv - pyenv exec pip install -r ./requirements.txt
 # to run this file, type in the command line:
 # python pdf2txt.py -o <output file> -i <input pdf> -d <service name> -k <service key>
 # the output file will be in the same directory as the input file

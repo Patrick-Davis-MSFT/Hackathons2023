@@ -1,7 +1,7 @@
 # MIT License
 
-# To run this
-# python .\removeInfoAssistFile.py -f <filename> -d <folder> -b <blobConnectString> -s <searchEndPoint> -k <searchKey> -ce <cosmosEndpoint> -ck <cosmosKey>
+# To run this place quotes around all the parameters
+# python ./removeInfoAssistFile.py -f <filename> -d <folder> -b <blobConnectString> -s <searchEndPoint> -k <searchKey> -ce <cosmosEndpoint> -ck <cosmosKey>
 
 
 # The required libraries have been added to the requirements.txt file
