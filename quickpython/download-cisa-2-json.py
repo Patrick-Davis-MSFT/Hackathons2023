@@ -1,4 +1,4 @@
-# Web Data scraping into JSON format eample
+# Web Data scraping into JSON format example.
 # to run 
 # import requirements
 # pip install -r ./requirements.txt

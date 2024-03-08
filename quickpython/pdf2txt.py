@@ -11,6 +11,7 @@ from pypdf import PdfReader, PdfWriter
 import argparse
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
+from azure.ai.formrecognizer import DocumentAnalysisClient
 
 def table_to_html(table):
     table_html = "<table>"
@@ -37,18 +38,18 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--output', help='output file name', required=True)
     parser.add_argument('-i', '--input', help='input file name', required=True)
     
-    parser.add_argument('-d', '--docintel', help='Service Name for Document Intelligence', required=True)
-    parser.add_argument('-k', '--dockey', help='Service Key for Document Intelligence', required=True)
+    parser.add_argument('-d', '--doc_intel', help='Service Name for Document Intelligence', required=True)
+    parser.add_argument('-k', '--doc_key', help='Service Key for Document Intelligence', required=True)
     args = parser.parse_args()
-    formrecognizer_creds = (
-        default_creds if args.dockey is None else AzureKeyCredential(args.dockey)
+    form_recognizer_creds = (
+        default_creds if args.doc_key is None else AzureKeyCredential(args.doc_key)
     )
 
     offset = 0
     page_map = []
     form_recognizer_client = DocumentAnalysisClient(
-        endpoint=f"https://{args.docintel}.cognitiveservices.azure.com/",
-        credential=formrecognizer_creds,
+        endpoint=f"https://{args.doc_intel}.cognitiveservices.azure.com/",
+        credential=form_recognizer_creds,
         headers={"x-ms-useragent": "azure-search-chat-demo/1.0.0"},
     )
     with open(args.input, "rb") as f:
