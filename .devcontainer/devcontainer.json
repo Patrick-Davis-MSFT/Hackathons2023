@@ -28,7 +28,8 @@
                 "ms-vscode.vscode-node-azure-pack",
                 "ms-vscode.powershell",
                 "ms-python.python",
-                "ms-python.vscode-pylance"
+                "ms-python.vscode-pylance",
+				"rangav.vscode-thunder-client"
             ]
         }
     }
