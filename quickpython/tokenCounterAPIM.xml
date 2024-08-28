@@ -1,0 +1,64 @@
+<policies>
+    <!-- Throttle, authorize, validate, cache, or transform the requests -->
+    <inbound>
+        <azure-openai-emit-token-metric>
+            <dimension name="Subscription ID" />
+        </azure-openai-emit-token-metric>
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com/" />
+        <base />
+        <set-variable name="requestBody" value="@(context.Request.Body.As<string>(preserveContent: true))" />
+        <!-- Check if 'STREAM=TRUE' is in the request body and set a variable accordingly -->
+        <choose>
+            <when condition="@(context.Variables.GetValueOrDefault<string>("requestBody").ToUpper().Contains("STREAM=TRUE"))">
+                <set-variable name="isStreamTrue" value="true" />
+            </when>
+            <otherwise>
+                <set-variable name="isStreamTrue" value="false" />
+            </otherwise>
+        </choose>
+        <!-- Send the request body to the Azure Function -->
+        <send-request mode="new" response-variable-name="azureFunctionResponse" timeout="20" ignore-error="false">
+            <set-url>https://fn-recordtokens.azurewebsites.net/api/promptCounter?code={{function-key}}</set-url>
+            <set-method>POST</set-method>
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>@(context.Variables.GetValueOrDefault<string>("requestBody"))</set-body>
+        </send-request>
+    </inbound>
+    <!-- Control if and how the requests are forwarded to services  -->
+    <backend>
+        <base />
+    </backend>
+    <!-- Customize the responses -->
+    <outbound>
+        <base />
+        <set-variable name="responseBody" value="@(context.Response.Body.As<string>(preserveContent: true))" />
+        <choose>
+            <when condition="@(context.Variables.GetValueOrDefault<string>("isStreamTrue").ToUpper().Contains("TRUE"))">
+                <send-request mode="new" response-variable-name="azureFunctionResponse" timeout="20" ignore-error="false">
+                    <set-url>https://fn-recordtokens.azurewebsites.net/api/pmtcntoutstream?code={{function-key}}</set-url>
+                    <set-method>POST</set-method>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@(context.Variables.GetValueOrDefault<string>("responseBody"))</set-body>
+                </send-request>
+            </when>
+            <otherwise>
+                <send-request mode="new" response-variable-name="azureFunctionResponse" timeout="20" ignore-error="false">
+                    <set-url>https://fn-recordtokens.azurewebsites.net/api/pmtcntoutbulk?code={{function-key}}</set-url>
+                    <set-method>POST</set-method>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@(context.Variables.GetValueOrDefault<string>("responseBody"))</set-body>
+                </send-request>
+            </otherwise>
+        </choose>
+    </outbound>
+    <!-- Handle exceptions and customize error responses  -->
+    <on-error>
+        <base />
+    </on-error>
+</policies>
