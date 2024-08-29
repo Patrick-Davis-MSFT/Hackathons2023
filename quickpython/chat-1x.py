@@ -3,7 +3,7 @@
 # you should switch to use the lastest stable calls in your code
 # https://beta.openai.com/docs/api-reference/chat
 # pip install -r ./requirements.txt or with pyenv - pyenv exec pip install -r ./requirements.txt
-# python .\chat-1x.py -e <endpoint> -k <key> -m <modelDeployment>
+# python ./chat-1x.py -e <endpoint> -k <key> -m <modelDeployment>
 # note Functions will only work with 1106 and later Model Versions only.
 # to get the weather ask about the weather in a predefined city "What is the weather in San Francisco?"
 # Note this is using a stub and does not go to the weather API. You can change the stub to call the weather API
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     client = AzureOpenAI(
         api_key = apiKey,  
-        api_version = "2023-12-01-preview",
+        api_version = "2024-06-01",
         azure_endpoint = apiEndpoint
     )
     tools = [
@@ -77,6 +77,7 @@ if __name__ == "__main__":
             exit()
         messages.append({"role": "user", "content": message})
         if (useFunction):
+            print(messages)
             response = client.chat.completions.create(
                 model=model, 
                 messages=messages,
@@ -84,9 +85,11 @@ if __name__ == "__main__":
                 tool_choice="auto",
             )
         else:
+            print(f"count of messages: {messages.count}")
             response = client.chat.completions.create(
                 model=model, 
                 messages=messages,
+                stream=False,
             )
         #print(response.model_dump_json(indent=2))
         print("\n")
@@ -133,5 +136,9 @@ if __name__ == "__main__":
             messages.append({"role": "assistant", "content": second_response.choices[0].message.content})    
         else:
             print(response_message.content)
+            print("\nModel\n")
+            print(response.model_dump_json(indent=2))
+            print("\nUsage\n")
+            print(response.usage.model_dump_json(indent=2))
             print("\n\n")
             messages.append({"role": "assistant", "content": response_message.content})
