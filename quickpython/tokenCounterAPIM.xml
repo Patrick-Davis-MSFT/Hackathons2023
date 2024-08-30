@@ -31,7 +31,7 @@
         <send-request mode="new" response-variable-name="azureFunctionResponse" timeout="20" ignore-error="false">
             <set-url>@{
                 var subscriptionId = context.Subscription.Id;
-                return $"https://{{function-host}}/api/pmtCntOutBulk/{subscriptionId}?code={{function-key}}";
+                return $"https://{{function-host}}/api/pmtCntOut/{subscriptionId}?code={{function-key}}";
             }</set-url>
             <set-method>POST</set-method>
             <set-header name="Content-Type" exists-action="override">
