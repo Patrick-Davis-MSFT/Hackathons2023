@@ -1,5 +1,5 @@
 # Internal cluster for Azure Government using an NGINX ingress controller
-`Tested on 09042024 in US Government Cloud in PowerShell`
+> Tested on 09042024 in US Government Cloud in PowerShell
 
 This document will describe how to create a private AKS cluster with a private NGINX controller
 
