@@ -17,10 +17,12 @@ Knowledge of Azure, AKS, V-NETS and Bastion hosts
 ### 1. Create a private aks cluster using the AKS Cluster
 ```powershell
 # Create Resource Group
-az group create -l usgovvirginia -n az-k8s-bd2g-rg
+az group create -l CLOUD -n RESOURCE_GROUP
  
 # Deploy template with in-line parameters
-az deployment group create -g az-k8s-bd2g-rg  --template-file .\main.json --parameters `
+az deployment group create -g RESOURCE_GROUP `
+ --template-uri https://raw.githubusercontent.com/Patrick-Davis-MSFT/Hackathons2023/main/aks-internal/main.json ` 
+ --parameters `
     resourceName=az-k8s-bd2g `
     upgradeChannel=stable `
     AksPaidSkuForSLA=true `
@@ -59,17 +61,38 @@ From this point onward all commands are run on the baston host
 ### 3. Install required programs on the bastion host
 
 1. Chocolatity 
-    `Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))`
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    ```
 2. Azure CLI
-    `$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi`
+    ```powershell
+    $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
+    ```
 3. Kubectl and Kubelogin
-    `choco install kubernetes-cli azure-kubelogin`
+    ```powershell
+    choco install kubernetes-cli azure-kubelogin
+    ```
 
-### 4. Enable the routing add-on
+### 4. Login to AKS
+Get the commands from the connect portion on the portal
+```powershell
+az cloud set --name AzureUSGovernment
+az login
+
+az account set --subscription SUBSCRIPTION_ID
+az aks get-credentials --resource-group RESOURCE_GROUP --name AKS_NAME
+
+kubectl get nodes
+
+```
+
+Test the connection with `kubectl get nodes`
+
+### 5. Enable the routing add-on
 ```powershell
 az aks approuting enable --resource-group RESOURCE_GROUP --name AKS_NAME
 ```
-### 5. Create a private dns and link it to the AKS VNET
+### 6. Create a private dns and link it to the AKS VNET
 
 use either the below PowerShell or the Portal
 
@@ -84,7 +107,7 @@ az network private-dns link vnet create --resource-group RESOURCE_GROUP \
 ``` 
 > If the bastion is in a peered vnet add the private dns link to the peered vnet as well
 
-### 6. Register the DNS with AKS 
+### 7. Register the DNS with AKS 
 ```powershell
 $ZONEID=$(az network private-dns zone show --resource-group RESOURCE_GROUP --name something.com --query "id" --output tsv)
 
@@ -92,7 +115,7 @@ az aks approuting zone add --resource-group RESOURCE_GROUP --name AKS_SERVICE --
 
 ```
 
-### 7. Run an altered version of the ingress controller daemon on the in power shell
+### 8. Run an altered version of the ingress controller daemon on the in power shell
 
 
 ```powershell
@@ -101,7 +124,7 @@ az aks command invoke -g RESOURCE_GROUP -n AKS_SERVICE --command " curl -v -sL h
 
 > Note This is a custom script changed for internal routing if you ran the invoke command in the above script from from the construction helper the previous nginx helm install must be removed before running this command. Run `helm list -A` to find the install and then `helm uninstall nginx-ingress -n ingress-basic` to remove it
 
-### 8. Deploy sample applications 
+### 9. Deploy sample applications 
 
 ```powershell
 kubectl create namespace hello-web-app-routing
@@ -117,7 +140,7 @@ kubectl -n hello-web-app-routing get ingress
 ```
 > Note it will take a few minutes to assign an IP address in the ingress controller. 
 
-### 9. Verify that the DNS now has a record for hello.something.com
+### 10. Verify that the DNS now has a record for hello.something.com pointing to the private ip of the aks loadbalancer in the MC_* resource group
 
 `az network private-dns record-set a list --resource-group RESOURCE_GROUP --zone-name something.com`
 View the site at the url
