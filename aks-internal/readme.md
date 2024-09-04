@@ -125,7 +125,7 @@ az aks approuting zone add --resource-group RESOURCE_GROUP --name AKS_SERVICE --
 az aks command invoke -g RESOURCE_GROUP -n AKS_SERVICE --command " curl -v -sL https://raw.githubusercontent.com/Patrick-Davis-MSFT/Hackathons2023/main/aks-internal/ingressPost.sh | bash -s -- -r https://github.com/Azure/AKS-Construction/releases/download/0.10.7 -p ingress=nginx -p ingressEveryNode=true 2>&1 | tee /tmp/deploy.log "
 ```
 
-> Note This is a custom script changed for internal routing if you ran the invoke command in the above script from from the construction helper the previous nginx helm install must be removed before running this command. Run `helm list -A` to find the install and then `helm uninstall nginx-ingress -n ingress-basic` to remove it
+> Note This is a custom script changed for internal routing if you ran the invoke command in the above script from from the construction helper the previous nginx helm install must be removed before running this command. Run `helm list -A` to find the install and then `helm uninstall nginx-ingress -n ingress-basic` and `kubectl delete NginxIngressController nginx-internal` to remove it
 
 ### 9. Deploy sample applications 
 
