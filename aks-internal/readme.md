@@ -9,6 +9,9 @@ This document will describe how to create a private AKS cluster with a private N
 * [Managed NGINX Ingress with the application routing Add-on](https://learn.microsoft.com/en-us/azure/aks/app-routing)
 * [Tutorial: Deploy Azure Bastion by using specified settings](https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-portal)
 * [Azure Kubelogin](https://azure.github.io/kubelogin/install.html)
+* [NGINX Annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)
+* [Azure LoadBalancer Annotations](https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#loadbalancer-annotations)
+* [Azure App Gateway Annotations](https://azure.github.io/application-gateway-kubernetes-ingress/annotations/)
 
 
 ## Prerequisites 
