@@ -84,6 +84,7 @@ az login
 az account set --subscription SUBSCRIPTION_ID
 az aks get-credentials --resource-group RESOURCE_GROUP --name AKS_NAME
 
+#test that you can communicate with AKS
 kubectl get nodes
 
 ```
