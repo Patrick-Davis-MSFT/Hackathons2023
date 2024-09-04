@@ -16,6 +16,8 @@ Knowledge of Azure, AKS, V-NETS and Bastion hosts
 ## Steps
 ### 1. Create a private aks cluster using the AKS Cluster
 ```powershell
+az cloud set --name AzureUSGovernment
+az login
 # Create Resource Group
 az group create -l CLOUD -n RESOURCE_GROUP
  
