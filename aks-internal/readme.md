@@ -8,6 +8,7 @@ This document will describe how to create a private AKS cluster with a private N
 * [Configure NGINX ingress controller to support Azure private DNS zone with application routing add-on](https://learn.microsoft.com/en-us/azure/aks/create-nginx-ingress-private-controller)
 * [Managed NGINX Ingress with the application routing Add-on](https://learn.microsoft.com/en-us/azure/aks/app-routing)
 * [Tutorial: Deploy Azure Bastion by using specified settings](https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-portal)
+* [Azure Kubelogin](https://azure.github.io/kubelogin/install.html)
 
 
 ## Prerequisites 
@@ -66,11 +67,18 @@ From this point onward all commands are run on the baston host
     ```powershell
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     ```
+    
 2. Azure CLI
     ```powershell
     $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
     ```
-3. Kubectl and Kubelogin
+    
+3. AKS CLI
+   ```powershell
+   az aks install-cli
+   ```
+   
+5. Kubectl and Kubelogin
     ```powershell
     choco install kubernetes-cli azure-kubelogin
     ```
