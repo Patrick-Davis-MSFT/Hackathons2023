@@ -105,9 +105,9 @@ az aks command invoke -g RESOURCE_GROUP -n AKS_SERVICE --command " curl -v -sL h
 
 ```powershell
 kubectl create namespace hello-web-app-routing
-kubectl -n hello-web-app-routing apply -f .\deployment.yaml
-kubectl -n hello-web-app-routing apply -f .\service.yaml
-kubectl -n hello-web-app-routing apply -f .\ingress.yaml
+kubectl -n hello-web-app-routing apply -f https://raw.githubusercontent.com/Patrick-Davis-MSFT/Hackathons2023/main/aks-internal/deployment.yaml
+kubectl -n hello-web-app-routing apply -f https://raw.githubusercontent.com/Patrick-Davis-MSFT/Hackathons2023/main/aks-internal/service.yaml
+kubectl -n hello-web-app-routing apply -f https://raw.githubusercontent.com/Patrick-Davis-MSFT/Hackathons2023/main/aks-internal/ingress.yaml
 
 #verify services are created in AKS 
 kubectl -n hello-web-app-routing get deployments
@@ -122,4 +122,4 @@ kubectl -n hello-web-app-routing get ingress
 `az network private-dns record-set a list --resource-group RESOURCE_GROUP --zone-name something.com`
 View the site at the url
 * `curl http://hello.something.com`
-* [Website](http://hello.something.com)
+* [Website](http://hello.something.com) at http://hello.something.com on the Bastion host
