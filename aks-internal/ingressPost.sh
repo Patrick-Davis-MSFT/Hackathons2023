@@ -293,7 +293,7 @@ if [ "$ingress" = "nginx" ]; then
         --set controller.metrics.serviceMonitor.enabled=${ingress_metrics_enabled} \
         --set controller.metrics.serviceMonitor.namespace=${prometheus_namespace} \
         --set controller.metrics.serviceMonitor.additionalLabels.release=${prometheus_helm_release_name} \
-        --set controller.annotations."service.beta.kubernetes.io/azure-load-balancer-internal"="true" \
+        --set-string controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-internal"="true" \
         --namespace ${nginx_namespace}
 fi
 
