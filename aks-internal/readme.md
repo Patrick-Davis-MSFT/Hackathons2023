@@ -113,10 +113,10 @@ use either the below PowerShell or the Portal
 ```powershell
 az network private-dns zone create --resource-group RESOURCE_GROUP --name something.com
 
-az network private-dns link vnet create --resource-group RESOURCE_GROUP \
-  --name myDNSLink \
-  --zone-name something.com \
-  --virtual-network AKS_VNET_NAME \
+az network private-dns link vnet create --resource-group RESOURCE_GROUP `
+  --name myDNSLink `
+  --zone-name something.com `
+  --virtual-network AKS_VNET_NAME `
   --registration-enabled false
 ``` 
 > If the bastion is in a peered vnet add the private dns link to the peered vnet as well
