@@ -216,6 +216,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-prev
 }
 
 
+
 output containerappsDomain string = containerAppEnv.properties.defaultDomain
 output containerAppFQDN string = containerApp.properties.configuration.ingress.fqdn
 output containerappsStaticIP string = containerAppEnv.properties.staticIp

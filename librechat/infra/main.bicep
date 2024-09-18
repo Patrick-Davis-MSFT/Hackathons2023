@@ -118,6 +118,12 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
           addressPrefix: '10.0.10.0/24'
         }
       }
+      {
+        name: 'vmMongoSubnet'
+        properties: {
+          addressPrefix: '10.0.11.0/24'
+        }
+      }
     ]
   }
 }
@@ -174,6 +180,17 @@ module containerAppPE 'ca-privateendpoint.bicep' = {
   dependsOn: [
     containerAppModule
   ]
+}
+
+module mongodbModule 'mongodb.bicep' = {
+  name: 'mongodbModule'
+  params: {
+    location: location
+    cosmosDbAccountName: containerAppName
+    subnetId: vnet.properties.subnets[4].id
+    keyVaultName: keyVaultName
+    virtualNetworkId: vnet.id
+  }
 }
 
 output containerAppFQDN string = containerAppModule.outputs.containerAppFQDN
