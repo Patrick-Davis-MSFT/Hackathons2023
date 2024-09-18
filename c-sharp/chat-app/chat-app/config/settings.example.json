@@ -1,0 +1,12 @@
+{
+  "deploymentId": "deploymentId",
+  "endpoint": "endpoint",
+  "apiKey": "apiKey",
+  "searchIndexName": "searchIndexName",
+  "searchQueryApiKey": "searchQueryApiKey",
+  "searchEndpoint": "searchEndpoint",
+  "visionDeploymentModel": "visionDeploymentModel",
+  "visionEndpoint": "visionEndpoint",
+  "visionApiKey": "visionApiKey",
+  "visionAPIVersion": "visionAPIVersion"
+}
