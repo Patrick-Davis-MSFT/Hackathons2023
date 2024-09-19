@@ -38,7 +38,7 @@ namespace chat_app.plugins
         [KernelFunction("seach_campingInfo")]
         [Description("Searches an index of information on camping")]
         [return: Description("Returns information on camping based on a search term")]
-        public static async Task<SearchResults<SearchDocument>> GetSearchQuery(string searchTerm)
+        public static async Task<searchResults[]> GetSearchQuery(string searchTerm)
         {
             try
             {
@@ -52,7 +52,19 @@ namespace chat_app.plugins
 
 
                 var response = await searchClient.SearchAsync<SearchDocument>(searchTerm, options);
-                return response.Value;
+                var result = response.Value.GetResults();
+                var searchResults = new List<searchResults>();
+                foreach (var res in result)
+                {
+                    searchResults tmp = new searchResults
+                    {
+                        chunk = res.Document.GetString("chunk"),
+                        title = res.Document.GetString("title")
+                    };
+                    searchResults.Add(tmp);
+                }
+
+                return searchResults.ToArray();
             }
             catch (Exception ex)
             {
@@ -64,16 +76,10 @@ namespace chat_app.plugins
         internal class searchResults
         {
 
-            [JsonPropertyName("chunk_id")]
-            public string chunk_id { get; set; }
-            [JsonPropertyName("text_parent_id")]
-            public string text_parent_id { get; set; }
             [JsonPropertyName("chunk")]
             public string chunk { get; set; }
             [JsonPropertyName("title")]
             public string title { get; set; }
-            [JsonPropertyName("image_parent_id")]
-            public string image_parent_id { get; set; }
         }
 
     }

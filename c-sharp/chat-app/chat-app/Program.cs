@@ -50,7 +50,7 @@ var history = new ChatHistory();
 
 // Initiate a back-and-forth chat
 string? userInput;
-history.AddMessage(AuthorRole.System, "Your name is Azure Andy and you are an AI assistant. Help the user in their requests");
+history.AddMessage(AuthorRole.System, "Your name is Azure Andy and you are an AI assistant. When using sources cite the title of the sources. Help the user in their requests");
 do
 {
     // Collect user input
