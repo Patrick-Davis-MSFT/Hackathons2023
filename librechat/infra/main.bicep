@@ -186,6 +186,7 @@ module postgresqlDatabase 'postgresql.bicep' = {
     virtualNetworkId: vnet.id
     dbpassword:dbpassword 
   }
+  dependsOn: [ keyVaultModule ]
 }
 
 module acrWithPE 'containerreg.bicep' = {
@@ -209,6 +210,7 @@ module storageAccountMod 'storage.bicep' = {
     keyVaultName: keyVaultName
     virtualNetworkId: vnet.id
   }
+  dependsOn: [ keyVaultModule ]
 }
 
 module containerAppModule 'containerapp.bicep' = {
@@ -229,6 +231,7 @@ module containerAppModule 'containerapp.bicep' = {
     maxReplicas: maxReplicas
     storageAccountName: storageAccountMod.outputs.storageAccountName
   }
+  dependsOn: [ storageAccountMod,keyVaultModule ]
 }
 
 module bastionModule 'bastion.bicep' = {
@@ -246,6 +249,7 @@ module bastionModule 'bastion.bicep' = {
   }
   dependsOn: [
     containerAppModule
+    keyVaultModule
   ]
 }
 
@@ -273,6 +277,8 @@ module mongodbModule 'mongodb.bicep' = {
     keyVaultName: keyVaultName
     virtualNetworkId: vnet.id
   }
+  
+  dependsOn: [ keyVaultModule ]
 }
 
 module redisModule 'redis.bicep' = {
@@ -284,6 +290,7 @@ module redisModule 'redis.bicep' = {
     keyVaultName: keyVaultName
     virtualNetworkId: vnet.id
   }
+  dependsOn: [ keyVaultModule ]
 }
 /*
 module kvSecrets 'keyvalutsecrets.bicep' = [for secret in libreChatEnvValues: {
