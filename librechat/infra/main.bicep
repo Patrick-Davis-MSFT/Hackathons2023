@@ -54,6 +54,8 @@ param minReplicas int = 1
 param maxReplicas int = 3
 @description('Specifies the name of the Key Vault.')
 param keyVaultName string = 'kv-${uniqueString(resourceGroup().id)}'
+@description('Specifies the name of the Redis.')
+param redisName string = 'red-${uniqueString(resourceGroup().id)}'
 @description('Specifies the name of the private endpoint subnet.')
 param privateEndpointSubnetName string = 'Subnet2'
 @description('Specifies the private endpoint subnet prefix.')
@@ -73,10 +75,15 @@ param adminUsername string
 param adminPassword string
 @description('Specifies the size of the Windows VM.')
 param vmSize string = 'Standard_DS1_v2'
+@description('Specifies the name of the Postgres server.')
+param postgreServerName string = 'psql-${uniqueString(resourceGroup().id)}'
+@description('Postgree Database Password')
+@secure()
+param dbpassword string
 
 
 
-resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -124,7 +131,83 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
           addressPrefix: '10.0.11.0/24'
         }
       }
+      {
+        name: 'vmRedisSubnet'
+        properties: {
+          addressPrefix: '10.0.12.0/24'
+        }
+      }
+      {
+        name: 'storageSubnet'
+        properties: {
+          addressPrefix: '10.0.13.0/24'
+        }
+      }
+      {
+        name: 'acrSubnet'
+        properties: {
+          addressPrefix: '10.0.14.0/24'
+        }
+      }
+      {
+        name: 'postgresSubnet'
+        properties: {
+          addressPrefix: '10.0.15.0/24'
+          delegations: [{
+            name: 'Microsoft.DBforPostgreSQL/flexibleServers'
+            properties: {
+              serviceName: 'Microsoft.DBforPostgreSQL/flexibleServers'
+            }
+          }]
+        }
+      }
     ]
+  }
+}
+
+module keyVaultModule 'keyvault.bicep' = {
+  name: 'keyVaultModule'
+  params: {
+    location: location
+    keyVaultName: keyVaultName
+    privateEndpointSubnetId: vnet.properties.subnets[1].id
+    virtualNetworkId: vnet.id
+  }
+}
+
+module postgresqlDatabase 'postgresql.bicep' = {
+  name: 'postgresqlDatabase'
+  params: {
+    location: location
+    serverName: postgreServerName
+    adminUsername: adminUsername
+    keyVaultName: keyVaultName
+    subnetId: vnet.properties.subnets[8].id
+    virtualNetworkId: vnet.id
+    dbpassword:dbpassword 
+  }
+}
+
+module acrWithPE 'containerreg.bicep' = {
+  name: 'acrWithPE'
+  params: {
+    location: location
+    registryName: 'acr${uniqueString(resourceGroup().id)}'
+    vnetId: vnet.id
+    subnetId: vnet.properties.subnets[7].id
+  }
+}
+
+module storageAccountMod 'storage.bicep' = {
+  name: 'storageAccountMod'
+  params: {
+    location: location
+    storageAccountName: 'sa${uniqueString(resourceGroup().id)}'
+    blobContainerName: 'blob'
+    smbShareName: 'file'
+    subnetId: vnet.properties.subnets[6].id
+    keyVaultName: keyVaultName
+    virtualNetworkId: vnet.id
   }
 }
 
@@ -133,8 +216,6 @@ module containerAppModule 'containerapp.bicep' = {
   params: {
     keyVaultName: keyVaultName
     location: location
-    virtualNetworkId: vnet.id
-    privateEndpointSubnetId: vnet.properties.subnets[1].id
     containerAppEnvName: containerAppEnvName
     containerAppEnvSubnetId: vnet.properties.subnets[0].id
     containerAppLogAnalyticsName: containerAppLogAnalyticsName
@@ -146,6 +227,7 @@ module containerAppModule 'containerapp.bicep' = {
     memorySize: memorySize
     minReplicas: minReplicas
     maxReplicas: maxReplicas
+    storageAccountName: storageAccountMod.outputs.storageAccountName
   }
 }
 
@@ -193,5 +275,28 @@ module mongodbModule 'mongodb.bicep' = {
   }
 }
 
+module redisModule 'redis.bicep' = {
+  name: 'redis-9944'
+  params: {
+    location: location
+    redisCacheName: redisName
+    subnetId: vnet.properties.subnets[5].id
+    keyVaultName: keyVaultName
+    virtualNetworkId: vnet.id
+  }
+}
+/*
+module kvSecrets 'keyvalutsecrets.bicep' = [for secret in libreChatEnvValues: {
+  name: 'kvSecrets-${secret.name}'
+  params: {
+    keyVaultName: keyVaultName
+    secretName: secret.name
+    secretValue: secret.value
+  }
+}]
+  */
+
 output containerAppFQDN string = containerAppModule.outputs.containerAppFQDN
 output containerAppIP string = containerAppModule.outputs.containerappsStaticIP
+output containerAppEnvName string = containerAppEnvName
+output keyVaultName string = keyVaultName

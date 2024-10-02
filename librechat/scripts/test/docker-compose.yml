@@ -1,0 +1,19 @@
+
+
+services:
+  vectordb-test:
+    container_name: vectordb
+    image: ankane/pgvector:latest
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    restart: always
+    volumeMounts:
+    - volumeName: file
+      mountPath: /var/lib/postgresql/data
+
+volumes:
+    - name: file
+      storageType: AzureFile
+      storageName: file

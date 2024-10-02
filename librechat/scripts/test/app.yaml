@@ -1,0 +1,80 @@
+id: /subscriptions/5b70c88c-b7b1-4e4b-9288-ff5e1152e3f3/resourceGroups/rg-librechat3/providers/Microsoft.App/containerapps/vectordb-test
+identity:
+  principalId: 02fec87f-515d-4fe1-aefd-83bd938d640f
+  tenantId: e362c86f-e64a-4e58-b26a-c8bf314b1093
+  type: SystemAssigned
+location: East US 2
+name: vectordb-test
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    dapr: null
+    identitySettings: []
+    ingress: null
+    maxInactiveRevisions: null
+    registries: null
+    runtime: null
+    secrets:
+    - name: azure-keyvault-resourceendpoint-f8faf
+    - name: azure-keyvault-scope-46c6f
+    service: null
+  customDomainVerificationId: 66554E58776233C0D582240D1D686FF6A0074F97E8D77932A05052D3A4B8031B
+  delegatedIdentities: []
+  environmentId: /subscriptions/5b70c88c-b7b1-4e4b-9288-ff5e1152e3f3/resourceGroups/rg-librechat3/providers/Microsoft.App/managedEnvironments/env-fyljvo2kzpgzk
+  eventStreamEndpoint: https://eastus2.azurecontainerapps.dev/subscriptions/5b70c88c-b7b1-4e4b-9288-ff5e1152e3f3/resourceGroups/rg-librechat3/containerApps/vectordb-test/eventstream
+  latestReadyRevisionName: vectordb-test--kltk16s
+  latestRevisionFqdn: ''
+  latestRevisionName: vectordb-test--kltk16s
+  managedEnvironmentId: /subscriptions/5b70c88c-b7b1-4e4b-9288-ff5e1152e3f3/resourceGroups/rg-librechat3/providers/Microsoft.App/managedEnvironments/env-fyljvo2kzpgzk
+  outboundIpAddresses:
+  - 20.122.203.23
+  patchingMode: Automatic
+  provisioningState: Succeeded
+  runningStatus: Running
+  template:
+    containers:
+    - env:
+      - name: POSTGRES_DB
+        value: mydatabase
+      - name: POSTGRES_USER
+        value: myuser
+      - name: POSTGRES_PASSWORD
+        value: mypassword
+      - name: AZURE_KEYVAULT_RESOURCEENDPOINT
+        secretRef: azure-keyvault-resourceendpoint-f8faf
+      - name: AZURE_KEYVAULT_SCOPE
+        secretRef: azure-keyvault-scope-46c6f
+      image: ankane/pgvector:latest
+      imageType: ContainerImage
+      name: vectordb
+      volumeMounts:
+      - volumeName: pgdata2
+        mountPath: /var/lib/postgresql/data
+      probes: []
+      resources:
+        cpu: 0.5
+        ephemeralStorage: 2Gi
+        memory: 1Gi
+    initContainers: null
+    revisionSuffix: ''
+    scale:
+      maxReplicas: 10
+      minReplicas: null
+      rules: null
+    serviceBinds: null
+    terminationGracePeriodSeconds: null
+    volumes: 
+    - name: pgdata2
+      storageType: AzureFile
+      storageName: file
+  workloadProfileName: null
+resourceGroup: rg-librechat3
+systemData:
+  createdAt: '2024-09-27T19:12:43.3287256'
+  createdBy: patrickdavis@FedAIRS.onmicrosoft.com
+  createdByType: User
+  lastModifiedAt: '2024-09-27T20:49:01.2692252'
+  lastModifiedBy: patrickdavis@FedAIRS.onmicrosoft.com
+  lastModifiedByType: User
+tags: {}
+type: Microsoft.App/containerApps

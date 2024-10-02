@@ -1,0 +1,306 @@
+name: meilisearch
+identity:
+  type: SystemAssigned
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    secrets:
+    - name: lc-host
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-host
+      identity: System
+    - name: lc-port
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-port
+      identity: System
+    - name: cosmosdbconnectionstring
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/cosmosDbConnectionString
+      identity: System
+    - name: lc-domain-client
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-domain-client
+      identity: System
+    - name: lc-domain-server
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-domain-server
+      identity: System
+    - name: lc-no-index
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-no-index
+      identity: System
+    - name: lc-console-json
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-console-json
+      identity: System
+    - name: lc-debug-logging
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-debug-logging
+      identity: System
+    - name: lc-debug-console
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-debug-console
+      identity: System
+    - name: lc-debug-openai
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-debug-openai
+      identity: System
+    - name: lc-config-path
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-config-path
+      identity: System
+    - name: lc-debug-plugins
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-debug-plugins
+      identity: System
+    - name: librechat-creds-key
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/librechat-creds-key
+      identity: System
+    - name: librechat-creds-iv
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/librechat-creds-iv
+      identity: System
+    - name: librechat-jwt-secret
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/librechat-jwt-secret
+      identity: System
+    - name: librechat-jwt-refresh-secret
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/librechat-jwt-refresh-secret
+      identity: System
+    - name: librechat-meili-master-key
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/librechat-meili-master-key
+      identity: System
+    - name: lc-sd-webui-url
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-sd-webui-url
+      identity: System
+    - name: lc-ban-violations
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-ban-violations
+      identity: System
+    - name: lc-ban-duration
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-ban-duration
+      identity: System
+    - name: lc-ban-interval
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-ban-interval
+      identity: System
+    - name: lc-login-violation-score
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-login-violation-score
+      identity: System
+    - name: lc-registration-violation-score
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-registration-violation-score
+      identity: System
+    - name: lc-concurrent-violation-score
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-concurrent-violation-score
+      identity: System
+    - name: lc-message-violation-score
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-message-violation-score
+      identity: System
+    - name: lc-non-browser-violation-score
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-non-browser-violation-score
+      identity: System
+    - name: lc-login-max
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-login-max
+      identity: System
+    - name: lc-login-window
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-login-window
+      identity: System
+    - name: lc-registration-max
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-registration-max
+      identity: System
+    - name: lc-registration-window
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-registration-window
+      identity: System
+    - name: lc-limit-concurrent-messages
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-limit-concurrent-messages
+      identity: System
+    - name: lc-concurrent-message-max
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-concurrent-message-max
+      identity: System
+    - name: lc-limit-message-ip
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-limit-message-ip
+      identity: System
+    - name: lc-message-ip-max
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-message-ip-max
+      identity: System
+    - name: lc-message-ip-window
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-message-ip-window
+      identity: System
+    - name: lc-limit-message-user
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-limit-message-user
+      identity: System
+    - name: lc-message-user-max
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-message-user-max
+      identity: System
+    - name: lc-message-user-window 
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-message-user-window 
+      identity: System
+    - name: lc-illegal-model-req-score
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-illegal-model-req-score
+      identity: System
+    - name: lc-check-balance
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-check-balance
+      identity: System
+    - name: lc-allow-email-login
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-email-login
+      identity: System
+    - name: lc-allow-registration
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-registration
+      identity: System
+    - name: lc-allow-social-login
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-social-login
+      identity: System
+    - name: lc-allow-social-registration
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-social-registration
+      identity: System
+    - name: lc-allow-password-reset
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-password-reset
+      identity: System
+    - name: lc-allow-unverified-email-login
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-unverified-email-login
+      identity: System
+    - name: lc-session-expiry
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-session-expiry
+      identity: System
+    - name: lc-refresh-token-expiry
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-refresh-token-expiry
+      identity: System
+    - name: lc-refresh-token-expiry
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-refresh-token-expiry
+      identity: System
+    - name: lc-allow-shared-links
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-shared-links
+      identity: System
+    - name: lc-allow-shared-links-public
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-allow-shared-links-public
+      identity: System
+    - name: lc-app-title
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-app-title
+      identity: System
+    - name: lc-help-and-faq-url
+      keyVaultUrl: https://kv-fyljvo2kzpgzk.vault.azure.net/secrets/lc-help-and-faq-url
+      identity: System
+  patchingMode: Automatic
+  environmentId: /subscriptions/5b70c88c-b7b1-4e4b-9288-ff5e1152e3f3/resourceGroups/rg-librechat3/providers/Microsoft.App/managedEnvironments/env-fyljvo2kzpgzk
+  template:
+    containers:
+    - env:
+      - name: MEILI_HOST
+        value: mydatabase
+      - name: MEILI_NO_ANALYTICS
+        value: true
+      - name: HOST
+        secretRef: lc-host
+      - name: PORT
+        secretRef: lc-port
+      - name: MONGO_URI
+        secretRef: cosmosdbconnectionstring
+      - name: DOMAIN_CLIENT
+        secretRef: lc-domain-client
+      - name: DOMAIN_SERVER
+        secretRef: lc-domain-server
+      - name: NO_INDEX
+        secretRef: lc-no-index
+      - name: CONSOLE_JSON
+        secretRef: lc-console-json
+      - name: DEBUG_LOGGING
+        secretRef: lc-debug-logging
+      - name: DEBUG_CONSOLE
+        secretRef: lc-debug-console
+      - name: DEBUG_OPENAI
+        secretRef: lc-debug-openai
+      - name: CONFIG_PATH
+        secretRef: lc-config-path
+      - name: DEBUG_PLUGINS
+        secretRef: lc-debug-plugins
+      - name: CREDS_KEY
+        secretRef: librechat-creds-key
+      - name: CREDS_IV
+        secretRef: librechat-creds-iv
+      - name: JWT_SECRET
+        secretRef: librechat-jwt-secret
+      - name: JWT_REFRESH_SECRET
+        secretRef: librechat-jwt-refresh-secret
+      - name: MEILI_MASTER_KEY
+        secretRef: librechat-meili-master-key
+      - name: SD_WEBUI_URL
+        secretRef: lc-sd-webui-url
+      - name: BAN_VIOLATIONS
+        secretRef: lc-ban-violations
+      - name: BAN_DURATION 
+        secretRef: lc-ban-duration
+      - name: BAN_INTERVAL
+        secretRef: lc-ban-interval
+      - name: LOGIN_VIOLATION_SCORE
+        secretRef: lc-login-violation-score
+      - name: REGISTRATION_VIOLATION_SCORE
+        secretRef: lc-registration-violation-score
+      - name: CONCURRENT_VIOLATION_SCORE
+        secretRef: lc-concurrent-violation-score
+      - name: MESSAGE_VIOLATION_SCORE
+        secretRef: lc-message-violation-score
+      - name: NON_BROWSER_VIOLATION_SCORE
+        secretRef: lc-non-browser-violation-score
+      - name: LOGIN_MAX
+        secretRef: lc-login-max
+      - name: LOGIN_WINDOW
+        secretRef: lc-login-window
+      - name: REGISTRATION_MAX
+        secretRef: lc-registration-max
+      - name: REGISTRATION_WINDOW
+        secretRef: lc-registration-window
+      - name: LIMIT_CONCURRENT_MESSAGES
+        secretRef: lc-limit-concurrent-messages
+      - name: CONCURRENT_MESSAGE_MAX
+        secretRef: lc-concurrent-message-max
+      - name: LIMIT_MESSAGE_IP
+        secretRef: lc-limit-message-ip
+      - name: MESSAGE_IP_MAX
+        secretRef: lc-message-ip-max
+      - name: MESSAGE_IP_WINDOW
+        secretRef: lc-message-ip-window
+      - name: LIMIT_MESSAGE_USER
+        secretRef: lc-limit-message-user
+      - name: MESSAGE_USER_MAX
+        secretRef: lc-message-user-max
+      - name: MESSAGE_USER_WINDOW 
+        secretRef: lc-message-user-window 
+      - name: ILLEGAL_MODEL_REQ_SCORE
+        secretRef: lc-illegal-model-req-score
+      - name: CHECK_BALANCE
+        secretRef: lc-check-balance
+      - name: ALLOW_EMAIL_LOGIN 
+        secretRef: lc-allow-email-login
+      - name: ALLOW_REGISTRATION
+        secretRef: lc-allow-registration
+      - name: ALLOW_SOCIAL_LOGIN
+        secretRef: lc-allow-social-login
+      - name: ALLOW_SOCIAL_REGISTRATION
+        secretRef: lc-allow-social-registration
+      - name: ALLOW_PASSWORD_RESET
+        secretRef: lc-allow-password-reset
+      - name: ALLOW_UNVERIFIED_EMAIL_LOGIN
+        secretRef: lc-allow-unverified-email-login
+      - name: SESSION_EXPIRY
+        secretRef: lc-session-expiry
+      - name: REFRESH_TOKEN_EXPIRY
+        secretRef: lc-refresh-token-expiry
+      - name: ALLOW_SHARED_LINKS
+        secretRef: lc-allow-shared-links
+      - name: ALLOW_SHARED_LINKS_PUBLIC
+        secretRef: lc-allow-shared-links-public
+      - name: APP_TITLE
+        secretRef: lc-app-title
+      - name: HELP_AND_FAQ_URL
+        secretRef: lc-help-and-faq-url
+      image: getmeili/meilisearch:v1.7.3
+      imageType: ContainerImage
+      name: meilisearch
+      volumeMounts:
+      - volumeName: meilidata
+        mountPath: /meili_data_v1.7/meili_data
+      volumeMounts:
+      - volumeName: meilidata
+        mountPath: /app
+      resources:
+        cpu: 0.75
+        ephemeralStorage: 2Gi
+        memory: 1.5Gi
+    initContainers: null
+    revisionSuffix: ''
+    scale:
+      maxReplicas: 10
+      minReplicas: null
+      rules: null
+    serviceBinds: null
+    terminationGracePeriodSeconds: null
+    volumes: 
+    - name: meilidata
+      storageType: AzureFile
+      storageName: file
+resourceGroup: rg-librechat3
+type: Microsoft.App/containerApps
