@@ -39,10 +39,10 @@
     * librechat-jwt-secret
     * librechat-jwt-refresh-secret
     * librechat-meili-master-key
-1. Create a librechat env file
+1. Create a librechat env file as needed. The default env file is included here
 1. Load the `./loadEnvtoKV.ps1` in the `librechat/scripts/LibreChat-AppDef` directory. The Key Vault was created in the bicep run above
+    * You will need to run this from the baston server or add yourself as a Key Vault Secret Contributor and allow your IP address. 
     * Run the command `./loadEnvtoKV.ps1 -envFilePath "[PathToLibrechatFile]" -keyVaultName "[KeyVaultName]"`
     * This will load all the env file to the key vault. Each secret will be in lowercase prefixed with 'lc-'
     * Rerunning this program after updating the `.env` file will update the secret values. Note: Restart the apps once you update the secret values if already deployed 
-1. Deploy the App. 
-
+1. Update and copy the yaml to the root of the file SMB share in the Azure Storage account

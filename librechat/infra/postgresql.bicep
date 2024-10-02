@@ -12,11 +12,50 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
 }
 
+resource randomPasswordEncode 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+  parent: keyVault
+  name: 'pgsqlvector-password-encode'
+  properties: {
+    value: uriComponent(dbpassword)
+  }
+}
+
 resource randomPassword 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   parent: keyVault
   name: 'pgsqlvector-password'
   properties: {
     value: dbpassword
+  }
+}
+
+resource databaseHost 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+  parent: keyVault
+  name: 'db-host'
+  properties: {
+    value: postgresqlServer.properties.fullyQualifiedDomainName
+  }
+}
+resource databaseUser 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+  parent: keyVault
+  name: 'db-user'
+  properties: {
+    value: adminUsername
+  }
+}
+
+resource vectorDBName 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+  parent: keyVault
+  name: 'db-vector'
+  properties: {
+    value: databaseName
+  }
+}
+
+resource postgresqlServerConfig 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2023-12-01-preview' = {
+  name: 'azure.extensions'
+  parent: postgresqlServer
+  properties: {
+    value: 'vector'
   }
 }
 

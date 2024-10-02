@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "containerAppEnvName": {
+        "value": "env-7723b4f3dgrvi"
+      },
+      "keyVaultName": {
+        "value": "kv-7723b4f3dgrvi"
+      },
+      "appUserAssignedIdentityName": {
+        "value": "appIdentity"
+      },
+      "meilinaContainerImage": {
+        "value": "getmeili/meilisearch:v1.7.3"
+      },
+      "lcTargetPort": {
+        "value": 80
+      },
+      "cpuCore": {
+        "value": "0.5"
+      },
+      "memorySize": {
+        "value": "1"
+      },
+      "minReplicas": {
+        "value": 1
+      },
+      "maxReplicas": {
+        "value": 3
+      }      
+    }
+  }
