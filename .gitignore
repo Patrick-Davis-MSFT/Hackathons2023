@@ -10,6 +10,7 @@ facedata/**
 facedata
 facedata/known/*.jpg
 facedata/unknown/*.jpg
+/parameter.json
 
 # .NET ignores
 bin
