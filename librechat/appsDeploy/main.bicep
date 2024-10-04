@@ -4,21 +4,35 @@ param containerAppEnvName string
 param keyVaultName string
 @description('Specifies the App User Assigned Identity Name')
 param appUserAssignedIdentityName string
-param lcTargetPort int = 80
+@description('Specifies the Azure container registry service name')
+param acrService string
+@description('Min Replicas for the containers')
 param minReplicas int = 1
+@description('Max Replicas for the containers')
 param maxReplicas int = 3
 @description('Number of CPU cores the container can use. Can be with a maximum of two decimals.')
 param cpuCore string = '0.5'
 @description('Amount of memory (in gibibytes, GiB) allocated to the container up to 4GiB. Can be with a maximum of two decimals. Ratio with CPU cores must be equal to 2.')
 param memorySize string = '1'
 
-@description('OPENAI API KEY')
+@description('openai api key for Azure')
 @secure()
-param openaiApiKey string 
+param azureOpenaiApiKey string
+@description('RAG openai api key for Azure')
+@secure()
+param ragAzureOpenAIKey string
+@description('Openai api Base URL for Azure')
+param azureOpenaiBaseUrl string
+@description('RAG Openai api Base URL for Azure')
+param ragAzureOpenaiBaseUrl string
+@description('RAG Azure API Version')
+param ragAzureAPIVersion string = '2024-06-01'
+@description('RAG Azure Deployment Name for Embeddings')
+param embeddingsDeployment string
 
 //meilinasearch settings
 param meilinaAppName string = 'meilisearch'
-param meilinaContainerImage string
+param meilinaContainerImage string = 'getmeili/meilisearch:v1.7.3'
 param meilinaTargetPort int = 7700
 
 //rag_api settings
@@ -27,13 +41,19 @@ param ragApiContainerImage string = 'ghcr.io/danny-avila/librechat-rag-api-dev-l
 param ragApiTargetPort int = 8000
 param databasePort string = '5432'
 
+//Librechat settings
+param lcTargetPort int = 3080
+param libreChatContainerService string = 'librechat'
+param libreChatImage string = 'azurelibrechat'
+param libreChatTag string = 'latest'
+
 //Get Keyvault Object
 resource keyvault 'Microsoft.KeyVault/vaults@2024-04-01-preview' existing = {
   name: keyVaultName
 }
 
 //Get Container Environment Object
-resource containerAppEnv 'Microsoft.ContainerInstance/containerGroups@2021-03-01' existing = {
+resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing = {
   name: containerAppEnvName
 }
 
@@ -41,14 +61,22 @@ resource appUserAssigned 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-
   name: appUserAssignedIdentityName
 }
 
+resource acrServiceObj 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
+  name: acrService
+}
+
 // BUILD ENV Secrets
 var secretEnv = [
   {
     name: 'lc-host'
-    keyVaultUrl: '${keyvault.properties.vaultUri}secrets/loganalyticsworkspacekey'
+    keyVaultUrl: '${keyvault.properties.vaultUri}secrets/lc-host'
     identity: appUserAssigned.id
   }
-  { name: 'lc-port', keyVaultUrl: '${keyvault.properties.vaultUri}secrets/lc-port', identity: appUserAssigned.id }
+  { 
+    name: 'lc-port'
+    keyVaultUrl: '${keyvault.properties.vaultUri}secrets/lc-port'
+     identity: appUserAssigned.id 
+  }
   {
     name: 'cosmosdbconnectionstring'
     keyVaultUrl: '${keyvault.properties.vaultUri}secrets/cosmosDbConnectionString'
@@ -309,11 +337,9 @@ var secretEnv = [
 
 //START ENV values
 var envValues = [
-  { name: 'HOST', secretRef: 'lc-host' }
-  { name: 'PORT', secretRef: 'lc-port' }
   { name: 'MONGO_URI', secretRef: 'cosmosdbconnectionstring' }
-  { name: 'DOMAIN_CLIENT', secretRef: 'lc-domain-client' }
-  { name: 'DOMAIN_SERVER', secretRef: 'lc-domain-server' }
+  { name: 'DOMAIN_CLIENT', value: 'https://${libreChatContainerService}.${containerAppEnv.properties.defaultDomain}' }
+  { name: 'DOMAIN_SERVER', value: 'https://${libreChatContainerService}.${containerAppEnv.properties.defaultDomain}' }
   { name: 'NO_INDEX', secretRef: 'lc-no-index' }
   { name: 'CONSOLE_JSON', secretRef: 'lc-console-json' }
   { name: 'DEBUG_LOGGING', secretRef: 'lc-debug-logging' }
@@ -403,7 +429,13 @@ module meilinaApp 'lcContainerApp.bicep' = {
         name: 'MEILI_NO_ANALYTICS'
         value: 'true'
       }
-      { name: 'OPENAI_API_KEY', value: openaiApiKey }
+      { name: 'EMBEDDINGS_PROVIDER', value: 'azure' }
+      { name: 'RAG_AZURE_OPENAI_API_VERSION', value: ragAzureAPIVersion }
+      { name: 'EMBEDDINGS_MODEL', value: embeddingsDeployment}
+      { name: 'AZURE_OPENAI_API_KEY', value: azureOpenaiApiKey }
+      { name: 'AZURE_OPENAI_ENDPOINT', value: azureOpenaiBaseUrl }
+      { name: 'RAG_AZURE_OPENAI_ENDPOINT', value: ragAzureOpenaiBaseUrl }
+      { name: 'RAG_AZURE_OPENAI_API_KEY', value: ragAzureOpenAIKey }
       ...envValues
     ]
     volumeMounts: meilinaVolumeMounts
@@ -458,7 +490,42 @@ module rag_api 'lcContainerApp.bicep' = {
       { name: 'POSTGRES_USER', secretRef: 'db-user' }
       { name: 'POSTGRES_DB', secretRef: 'db-vector' }
       { name: 'RAG_PORT', value: '${ragApiTargetPort}' }
-      { name: 'OPENAI_API_KEY', value: openaiApiKey }
+      { name: 'EMBEDDINGS_PROVIDER', value: 'azure' }
+      { name: 'RAG_AZURE_OPENAI_API_VERSION', value: ragAzureAPIVersion }
+      { name: 'EMBEDDINGS_MODEL', value: embeddingsDeployment}
+      { name: 'AZURE_OPENAI_API_KEY', value: azureOpenaiApiKey }
+      { name: 'AZURE_OPENAI_ENDPOINT', value: azureOpenaiBaseUrl }
+      { name: 'RAG_AZURE_OPENAI_ENDPOINT', value: ragAzureOpenaiBaseUrl }
+      { name: 'RAG_AZURE_OPENAI_API_KEY', value: ragAzureOpenAIKey }
+      ...envValues
+    ]
+
+  }
+}
+module api 'lcContainerApp.bicep' = {
+  name: libreChatContainerService
+  params: {
+    containerAppName: libreChatContainerService
+    containerAppEnvName: containerAppEnv.name
+    appUserAssignedIdentityName: appUserAssigned.name
+    containerImage: '${acrServiceObj.properties.loginServer}/${libreChatImage}:${libreChatTag}'
+    targetPort: lcTargetPort
+    minReplicas: minReplicas
+    maxReplicas: maxReplicas
+    volumeMounts: [
+      {
+        volumeName: 'meilidata'
+        mountPath: '/config'
+      }
+    ]
+    volumes: meilinaVolumes
+    secretEnv: [...secretEnv]
+    envValues: [
+      { name: 'NODE_ENV', value: 'production'}
+      { name: 'MEILI_HOST', value: 'https://${meilinaApp.outputs.container_uri}'}
+      { name: 'RAG_PORT', value: '443'}
+      { name: 'RAG_API_URL', value: 'https://${rag_api.outputs.container_uri}'}
+      
       ...envValues
     ]
   }

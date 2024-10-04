@@ -9,7 +9,7 @@ param containerAppName string = 'meilisearch'
 @description('Specifies the docker container image to deploy.')
 param containerImage string = 'getmeili/meilisearch:v1.7.3'
 // parameters for app 
-param targetPort int = 80
+param targetPort int
 param minReplicas int = 1
 param maxReplicas int = 3
 @description('Number of CPU cores the container can use. Can be with a maximum of two decimals.')
@@ -48,6 +48,12 @@ resource meilinaApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
     managedEnvironmentId: containerAppEnv.id
     configuration: {
+      registries: [
+        {
+          server: 'acr7723b4f3dgrvi.azurecr.io'
+          identity: appIdentity.id
+        }
+      ]
       secrets: secretEnv
       ingress: {
         external: true
@@ -61,7 +67,9 @@ resource meilinaApp 'Microsoft.App/containerApps@2024-03-01' = {
         ]
       }
     }
+    
     template: {
+
       containers: [
         {
           name: containerAppName
@@ -78,8 +86,10 @@ resource meilinaApp 'Microsoft.App/containerApps@2024-03-01' = {
         minReplicas: minReplicas
         maxReplicas: maxReplicas
       }
-
       volumes: volumes
     }
   }
 }
+
+output container_uri string = meilinaApp.properties.configuration.ingress.fqdn
+output container_port int = 443

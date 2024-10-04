@@ -11,6 +11,7 @@ facedata
 facedata/known/*.jpg
 facedata/unknown/*.jpg
 /parameter.json
+/librechat/appsDeploy/parameter.json
 
 # .NET ignores
 bin
