@@ -501,6 +501,7 @@ module rag_api 'lcContainerApp.bicep' = {
     ]
 
   }
+  dependsOn: [meilinaApp]
 }
 module api 'lcContainerApp.bicep' = {
   name: libreChatContainerService

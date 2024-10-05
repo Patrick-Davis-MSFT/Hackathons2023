@@ -106,9 +106,6 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' = {
           serviceEndpoints: [
             {
               service: 'Microsoft.KeyVault'
-              locations: [
-                location
-              ]
             }
           ]
         }
@@ -257,8 +254,6 @@ module containerAppPE 'ca-privateendpoint.bicep' = {
   name: 'containerAppPE'
   params: {
     containerAppEnvName: containerAppEnvName
-    location: location
-    privateEndpointSubnetId: vnet.properties.subnets[1].id
     virtualNetworkId: vnet.id
     containerAppDefaultDomain: containerAppModule.outputs.containerappsDomain
     containerAppEnvStaticIP: containerAppModule.outputs.containerappsStaticIP

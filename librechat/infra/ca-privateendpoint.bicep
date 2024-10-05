@@ -1,14 +1,10 @@
 
-@description('Specifies the location for all resources.')
-param location string
 @description('Specifies the name of the container app environment.')
 param containerAppEnvName string
 @description('Specifies the name of the container app default Domain.')
 param containerAppDefaultDomain string
 @description('Specifies the ID of the virtual network.')
 param virtualNetworkId string
-@description('Specifies the ID of the private endpoint subnet.')
-param privateEndpointSubnetId string
 @description('Container Apps Enviroment static IP.')
 param containerAppEnvStaticIP string
 

@@ -55,11 +55,12 @@ resource postgresqlServerConfig 'Microsoft.DBforPostgreSQL/flexibleServers/confi
   name: 'azure.extensions'
   parent: postgresqlServer
   properties: {
-    value: 'vector'
+    value: 'VECTOR'
+    source: 'user-override'
   }
 }
 
-resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2023-12-01-preview' = {
+resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
   name: serverName
   location: location
   identity: {

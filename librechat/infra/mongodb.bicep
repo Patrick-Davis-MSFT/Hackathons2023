@@ -5,12 +5,13 @@ param keyVaultName string
 param virtualNetworkId string
 param collectionName string = 'librechat'
 
-resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-04-15' = {
+resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2024-05-15' = {
   name: cosmosDbAccountName
   location: location
   kind: 'MongoDB'
   properties: {
     databaseAccountOfferType: 'Standard'
+    publicNetworkAccess: 'Disabled'
     locations: [
       {
         locationName: location
@@ -69,7 +70,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01' = {
 }
 
 resource privateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
-  name: 'privatelink.documents.azure.com'
+  name: 'privatelink.mongo.cosmos.azure.com'
   location: 'global'
 }
 
