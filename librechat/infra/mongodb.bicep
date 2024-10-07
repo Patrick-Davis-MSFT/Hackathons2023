@@ -12,6 +12,9 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2024-05-15' = {
   properties: {
     databaseAccountOfferType: 'Standard'
     publicNetworkAccess: 'Disabled'
+    apiProperties: {
+      serverVersion: '7.0'
+    }
     locations: [
       {
         locationName: location
@@ -110,7 +113,7 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2021-04-01-preview' =
   parent: keyVault
   name: 'cosmosDbConnectionString'
   properties: {
-    value: 'mongodb://${cosmosDbAccount.properties.documentEndpoint}:${cosmosDbAccount.listKeys().primaryMasterKey}@${cosmosDbAccount.properties.documentEndpoint}:10255/${cosmosDbDatabase.name}?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@${cosmosDbAccountName}@'
+    value: 'mongodb://${cosmosDbAccount.name}:${uriComponent(cosmosDbAccount.listKeys().primaryMasterKey)}@${cosmosDbAccount.name}.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@${cosmosDbAccountName}@'
   }
 }
 

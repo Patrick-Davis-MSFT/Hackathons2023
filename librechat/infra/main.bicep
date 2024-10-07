@@ -54,8 +54,8 @@ param minReplicas int = 1
 param maxReplicas int = 3
 @description('Specifies the name of the Key Vault.')
 param keyVaultName string = 'kv-${uniqueString(resourceGroup().id)}'
-@description('Specifies the name of the Redis.')
-param redisName string = 'red-${uniqueString(resourceGroup().id)}'
+//@description('Specifies the name of the Redis.')
+//param redisName string = 'red-${uniqueString(resourceGroup().id)}'
 @description('Specifies the name of the private endpoint subnet.')
 param privateEndpointSubnetName string = 'Subnet2'
 @description('Specifies the private endpoint subnet prefix.')
@@ -276,6 +276,7 @@ module mongodbModule 'mongodb.bicep' = {
   dependsOn: [ keyVaultModule ]
 }
 
+/*
 module redisModule 'redis.bicep' = {
   name: 'redis-9944'
   params: {
@@ -287,7 +288,6 @@ module redisModule 'redis.bicep' = {
   }
   dependsOn: [ keyVaultModule ]
 }
-/*
 module kvSecrets 'keyvalutsecrets.bicep' = [for secret in libreChatEnvValues: {
   name: 'kvSecrets-${secret.name}'
   params: {

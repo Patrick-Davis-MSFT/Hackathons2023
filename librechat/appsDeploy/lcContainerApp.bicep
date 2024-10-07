@@ -8,6 +8,7 @@ param appUserAssignedIdentityName string
 param containerAppName string = 'meilisearch'
 @description('Specifies the docker container image to deploy.')
 param containerImage string = 'getmeili/meilisearch:v1.7.3'
+param registrys array = []
 // parameters for app 
 param targetPort int
 param minReplicas int = 1
@@ -36,7 +37,7 @@ resource appIdentity  'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-
   name: appUserAssignedIdentityName
 }
 
-resource meilinaApp 'Microsoft.App/containerApps@2024-03-01' = {
+resource contApp 'Microsoft.App/containerApps@2024-03-01' = {
   name: containerAppName
   location: resourceGroup().location
   identity: {
@@ -48,12 +49,7 @@ resource meilinaApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
     managedEnvironmentId: containerAppEnv.id
     configuration: {
-      registries: [
-        {
-          server: 'acr7723b4f3dgrvi.azurecr.io'
-          identity: appIdentity.id
-        }
-      ]
+      registries: registrys
       secrets: secretEnv
       ingress: {
         external: true
@@ -91,5 +87,5 @@ resource meilinaApp 'Microsoft.App/containerApps@2024-03-01' = {
   }
 }
 
-output container_uri string = meilinaApp.properties.configuration.ingress.fqdn
+output container_uri string = contApp.properties.configuration.ingress.fqdn
 output container_port int = 443

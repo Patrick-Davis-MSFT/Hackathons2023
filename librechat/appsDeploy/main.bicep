@@ -510,6 +510,12 @@ module api 'lcContainerApp.bicep' = {
     containerAppEnvName: containerAppEnv.name
     appUserAssignedIdentityName: appUserAssigned.name
     containerImage: '${acrServiceObj.properties.loginServer}/${libreChatImage}:${libreChatTag}'
+    registrys: [
+      {
+      server: acrServiceObj.properties.loginServer
+      identity: appUserAssigned.id
+    }
+  ]
     targetPort: lcTargetPort
     minReplicas: minReplicas
     maxReplicas: maxReplicas
