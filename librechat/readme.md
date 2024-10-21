@@ -72,10 +72,12 @@
         * For the rag_api container: AZURE_OPENAI_ENDPOINT
         * For the rag_api container: RAG_AZURE_OPENAI_ENDPOINT
         * For the rag_api container: RAG_AZURE_OPENAI_API_KEY
+        * For the rag_api container: RAG_UPLOAD_DIR
         * For the librechat container: NODE_ENV
         * For the librechat container: MEILI_HOST
         * For the librechat container: RAG_PORT
         * For the librechat container: RAG_API_URL
+        * For the librechat container: RAG_UPLOAD_DIR
         * The setting for HOST, PORT are ignored
         * The setting for DOMAIN_CLIENT and DOMAIN_SERVER are dynamically overwritten
 1. Verify Librechat is available on the bastion host at the URL noted in the Librechat container app in the resource group.

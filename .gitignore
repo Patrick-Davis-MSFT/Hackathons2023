@@ -62,3 +62,5 @@ __pycache__/
 __blobstorage__
 __queuestorage__
 __azurite_db*__.json
+librechat/appsDeploy/parameter*.json
+librechat/scripts/LibreChat/

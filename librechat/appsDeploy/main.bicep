@@ -391,9 +391,14 @@ var envValues = [
 
 var meilinaVolumes = [
   {
-    name: 'meilidata'
+    name: 'config'
     storageType: 'AzureFile'
     storageName: 'file'
+  }
+  {
+    name: 'meilidata'
+    storageType: 'AzureFile'
+    storageName: 'melidata'
   }
 ]
 var meilinaVolumeMounts = [
@@ -402,7 +407,7 @@ var meilinaVolumeMounts = [
     mountPath: '/meili_data_v1.7'
   }
   {
-    volumeName: 'meilidata'
+    volumeName: 'config'
     mountPath: '/config'
   }
 ]
@@ -443,6 +448,19 @@ module meilinaApp 'lcContainerApp.bicep' = {
   }
 }
 
+var ragVolumes = [
+  {
+    name: 'meilidata'
+    storageType: 'AzureFile'
+    storageName: 'file'
+  }
+  {
+    name: 'datadir'
+    storageType: 'AzureFile'
+    storageName: 'data'
+  }
+]
+
 module rag_api 'lcContainerApp.bicep' = {
   name: 'rag-api'
   params: {
@@ -457,8 +475,12 @@ module rag_api 'lcContainerApp.bicep' = {
         volumeName: 'meilidata'
         mountPath: '/config'
       }
+      {
+        volumeName: 'datadir'
+        mountPath: '/data'
+      }
     ]
-    volumes: meilinaVolumes
+    volumes: ragVolumes
     containerAppEnvName: containerAppEnv.name
     secretEnv: [
       {
@@ -497,6 +519,7 @@ module rag_api 'lcContainerApp.bicep' = {
       { name: 'AZURE_OPENAI_ENDPOINT', value: azureOpenaiBaseUrl }
       { name: 'RAG_AZURE_OPENAI_ENDPOINT', value: ragAzureOpenaiBaseUrl }
       { name: 'RAG_AZURE_OPENAI_API_KEY', value: ragAzureOpenAIKey }
+      { name: 'RAG_UPLOAD_DIR', value: '/data' }
       ...envValues
     ]
 
@@ -524,14 +547,19 @@ module api 'lcContainerApp.bicep' = {
         volumeName: 'meilidata'
         mountPath: '/config'
       }
+      {
+        volumeName: 'datadir'
+        mountPath: '/data'
+      }
     ]
-    volumes: meilinaVolumes
+    volumes: ragVolumes
     secretEnv: [...secretEnv]
     envValues: [
       { name: 'NODE_ENV', value: 'production'}
       { name: 'MEILI_HOST', value: 'https://${meilinaApp.outputs.container_uri}'}
       { name: 'RAG_PORT', value: '443'}
       { name: 'RAG_API_URL', value: 'https://${rag_api.outputs.container_uri}'}
+      { name: 'RAG_UPLOAD_DIR', value: '/data' }
       
       ...envValues
     ]

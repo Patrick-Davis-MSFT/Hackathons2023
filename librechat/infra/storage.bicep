@@ -4,8 +4,10 @@ param storageAccountName string
 @description('Specifies the location for the storage account.')
 param location string
 
-@description('Specifies the name of the SMB share.')
-param smbShareName string
+@description('Specifies the name of the SMB share for configuration.')
+param smbShareNameConfig string
+@description('Specifies the name of the SMB share for datafiles.')
+param smbShareNameData string
 
 @description('Specifies the name of the blob container.')
 param blobContainerName string
@@ -34,7 +36,14 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
 }
 
 resource fileShare 'Microsoft.Storage/storageAccounts/fileServices/shares@2023-05-01' = {
-  name: '${storageAccount.name}/default/${smbShareName}'
+  name: '${storageAccount.name}/default/${smbShareNameConfig}'
+  properties: {
+    shareQuota: 5 // Quota in GB
+  }
+}
+
+resource fileShareData 'Microsoft.Storage/storageAccounts/fileServices/shares@2023-05-01' = {
+  name: '${storageAccount.name}/default/${smbShareNameData}'
   properties: {
     shareQuota: 500 // Quota in GB
   }

@@ -105,6 +105,33 @@ resource appEnvStorage 'Microsoft.App/managedEnvironments/storages@2024-03-01' =
   }
 }
 
+resource appEnvStorageData 'Microsoft.App/managedEnvironments/storages@2024-03-01' = {
+  name: 'data'
+  parent: containerAppEnv
+  properties: {
+    azureFile: {
+      accessMode: 'ReadWrite'
+      accountName: storageAccount.name
+      accountKey:  listKeys(storageAccount.id, '2023-05-01').keys[0].value
+      shareName: 'data'
+    }
+  }
+}
+
+resource appEnvStorageMeilina 'Microsoft.App/managedEnvironments/storages@2024-03-01' = {
+  name: 'melidata'
+  parent: containerAppEnv
+  properties: {
+    azureFile: {
+      accessMode: 'ReadWrite'
+      accountName: storageAccount.name
+      accountKey:  listKeys(storageAccount.id, '2023-05-01').keys[0].value
+      shareName: 'melidata'
+    }
+  }
+}
+
+
 resource appIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-31-preview' = {
   name: 'appIdentity'
   location: location

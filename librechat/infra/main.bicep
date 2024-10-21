@@ -202,7 +202,8 @@ module storageAccountMod 'storage.bicep' = {
     location: location
     storageAccountName: 'sa${uniqueString(resourceGroup().id)}'
     blobContainerName: 'blob'
-    smbShareName: 'file'
+    smbShareNameConfig: 'file'
+    smbShareNameData: 'data'
     subnetId: vnet.properties.subnets[6].id
     keyVaultName: keyVaultName
     virtualNetworkId: vnet.id
