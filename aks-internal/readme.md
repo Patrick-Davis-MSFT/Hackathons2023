@@ -66,22 +66,22 @@ From this point onward all commands are run on the baston host
 
 ### 3. Install required programs on the bastion host
 
-1. Chocolatity 
-    ```powershell
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-    ```
-    
-2. Azure CLI
+1. Azure CLI
     ```powershell
     $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
     ```
     
-3. AKS CLI
+1. AKS CLI
    ```powershell
    az aks install-cli
    ```
    
-5. Kubectl and Kubelogin
+1. Chocolatity (If the previous does not install kubectl)
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    ```
+    
+1. Kubectl and Kubelogin
     ```powershell
     choco install kubernetes-cli azure-kubelogin
     ```
