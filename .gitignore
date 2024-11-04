@@ -6,6 +6,9 @@ output.txt
 *.csv
 output/**
 output
+testPictures/**
+testPictures
+testPictures/*.jpg
 facedata/**
 facedata
 facedata/known/*.jpg
