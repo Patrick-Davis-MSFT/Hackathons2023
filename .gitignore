@@ -67,3 +67,5 @@ __queuestorage__
 __azurite_db*__.json
 librechat/appsDeploy/parameter*.json
 librechat/scripts/LibreChat/
+quickpython/docClassifier/exampleDocuments/**
+quickpython/exampleDocuments - Copy/**
