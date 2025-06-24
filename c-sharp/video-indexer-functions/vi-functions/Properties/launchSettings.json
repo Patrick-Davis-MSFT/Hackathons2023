@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "vi_functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7083",
+      "launchBrowser": false
+    }
+  }
+}
